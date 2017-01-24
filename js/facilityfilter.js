@@ -18,13 +18,21 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
     };
     // console.log("getFilteredFeaturesGeoJson");
 
-    // 認可保育園の検索元データを取得
-    var ninkaFeatures = [];
+    // 私立認可保育園の検索元データを取得
+    var priNinkaFeatures = [];
     _features = nurseryFacilities.features.filter(function (item,idx) {
             var type = item.properties['種別'] ? item.properties['種別'] : item.properties['Type'];
-            if(type == "認可保育所") return true;
+            if(type == "私立認可") return true;
         });
-    Array.prototype.push.apply(ninkaFeatures, _features);
+    Array.prototype.push.apply(priNinkaFeatures, _features);
+
+    // 公立認可保育園の検索元データを取得
+    var pubNinkaFeatures = [];
+    _features = nurseryFacilities.features.filter(function (item,idx) {
+            var type = item.properties['種別'] ? item.properties['種別'] : item.properties['Type'];
+            if(type == "公立認可") return true;
+        });
+    Array.prototype.push.apply(pubNinkaFeatures, _features);
 
     // 認可外保育園の検索元データを取得
     var ninkagaiFeatures = [];
@@ -46,7 +54,7 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
     // 認可保育所向けフィルター
     // ----------------------------------------------------------------------
     // 認可保育所：開園時間
-    // console.log("[before]ninkaFeatures length:", ninkaFeatures.length);
+    // console.log("[before]priNinkaFeatures length:", priNinkaFeatures.length);
     if(conditions['ninkaOpenTime']) {
         filterfunc = function (item, idx) {
             f = function (item,idx) {
@@ -58,7 +66,7 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
             };
             return f(item,idx);
         };
-        ninkaFeatures = ninkaFeatures.filter(filterfunc);
+        priNinkaFeatures = priNinkaFeatures.filter(filterfunc);
     }
     // 認可保育所：終園時間
     if(conditions['ninkaCloseTime']) {
@@ -89,7 +97,7 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
             return f(item,idx);
         };
 
-        ninkaFeatures = ninkaFeatures.filter(filterfunc);
+        priNinkaFeatures = priNinkaFeatures.filter(filterfunc);
     }
     // 認可保育所：一時
     if(conditions['ninkaIchijiHoiku']) {
@@ -99,7 +107,7 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
                 return true;
             }
         };
-        ninkaFeatures = ninkaFeatures.filter(filterfunc);
+        priNinkaFeatures = priNinkaFeatures.filter(filterfunc);
     }
     // 認可保育所：夜間
     if(conditions['ninkaYakan']) {
@@ -109,7 +117,7 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
                 return true;
             }
         };
-        ninkaFeatures = ninkaFeatures.filter(filterfunc);
+        priNinkaFeatures = priNinkaFeatures.filter(filterfunc);
     }
     // 認可保育所：休日
     if(conditions['ninkaKyujitu']) {
@@ -119,7 +127,7 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
                 return true;
             }
         };
-        ninkaFeatures = ninkaFeatures.filter(filterfunc);
+        priNinkaFeatures = priNinkaFeatures.filter(filterfunc);
     }
     if(conditions['ninkaVacancy']) {
         filterfunc = function (item,idx) {
@@ -128,7 +136,7 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
                 return true;
             }
         };
-        ninkaFeatures = ninkaFeatures.filter(filterfunc);
+        priNinkaFeatures = priNinkaFeatures.filter(filterfunc);
     }
     // console.log("[after]ninkaFeatures length:", ninkaFeatures.length);
 

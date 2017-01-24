@@ -213,8 +213,13 @@ $('#mainPage').on('pageshow', function() {
 		papamamap.switchLayer(this.id, $(this).prop('checked'));
 	});
 
-	// 認可保育所チェックボックスのイベント設定
-	$('#cbNinka').click(function() {
+	// 私立認可保育所チェックボックスのイベント設定
+	$('#cbPriNinka').click(function() {
+		papamamap.switchLayer(this.id, $(this).prop('checked'));
+	});
+
+	// 公立認可保育所チェックボックスのイベント設定
+	$('#cbPubNinka').click(function() {
 		papamamap.switchLayer(this.id, $(this).prop('checked'));
 	});
 
@@ -404,11 +409,13 @@ $('#mainPage').on('pageshow', function() {
 	 */
 	function updateLayerStatus(checkObj)
 	{
-		papamamap.switchLayer($('#cbNinka').prop('id'), checkObj.ninka);
+		papamamap.switchLayer($('#cbPriNinka').prop('id'), checkObj.priNinka);
+		papamamap.switchLayer($('#cbPubNinka').prop('id'), checkObj.pubNinka);
 		papamamap.switchLayer($('#cbNinkagai').prop('id'), checkObj.ninkagai);
 		papamamap.switchLayer($('#cbYhoiku').prop('id'), checkObj.yhoiku);
 		papamamap.switchLayer($('#cbKindergarten').prop('id'), checkObj.kindergarten);
-		$('#cbNinka').prop('checked', checkObj.ninka).checkboxradio('refresh');
+		$('#cbPriNinka').prop('checked', checkObj.priNinka).checkboxradio('refresh');
+		$('#cbPubNinka').prop('checked', checkObj.pubNinka).checkboxradio('refresh');
 		$('#cbNinkagai').prop('checked', checkObj.ninkagai).checkboxradio('refresh');
 		$('#cbYhoiku').prop('checked', checkObj.yhoiku).checkboxradio('refresh');
 		$('#cbKindergarten').prop('checked', checkObj.kindergarten).checkboxradio('refresh');

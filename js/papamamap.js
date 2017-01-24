@@ -144,7 +144,7 @@ Papamamap.prototype.animatedMove = function(lon, lat, isTransform)
 
 
 /**
- * 指定したgeojsonデータを元に認可外・認可・幼稚園レイヤーを描写する
+ * 指定したgeojsonデータを元に認可外・私立認可・公立認可・幼稚園・横浜保育室レイヤーを描写する
  *
  * @param {[type]} facilitiesData [description]
  */
@@ -178,15 +178,37 @@ Papamamap.prototype.addNurseryFacilitiesLayer = function(facilitiesData)
             style: ninkagaiStyleFunction
         })
     );
-    // 認可
+    // 私立認可
     this.map.addLayer(
         new ol.layer.Vector({
             source: new ol.source.GeoJSON({
                 projection: 'EPSG:3857',
                 object: facilitiesData
             }),
-            name: 'layerNinka',
-            style: ninkaStyleFunction
+            name: 'layerPriNinka',
+            style: priNinkaStyleFunction
+        })
+    );
+    // 公立認可
+    this.map.addLayer(
+        new ol.layer.Vector({
+            source: new ol.source.GeoJSON({
+                projection: 'EPSG:3857',
+                object: facilitiesData
+            }),
+            name: 'layerPubNinka',
+            style: pubNinkaStyleFunction
+        })
+    );
+    // 横浜保育室
+    this.map.addLayer(
+        new ol.layer.Vector({
+            source: new ol.source.GeoJSON({
+                projection: 'EPSG:3857',
+                object: facilitiesData
+            }),
+            name: 'layerYhoiku',
+            style: yhoikuStyleFunction
         })
     );
 };
@@ -396,7 +418,7 @@ Papamamap.prototype.getPopupContent = function(feature)
         content += '</td>';
         content += '</tr>';
     }
-    if(type == "認可保育所") {
+    if(type == "私立認可") {
         content += '<tr>';
         content += '<th>欠員</th>';
         content += '<td>';

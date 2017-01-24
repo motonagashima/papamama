@@ -24,16 +24,20 @@
 	text-shadow: black 0.1em 0.1em 0.2em;
 }
 
-#lblNinka.ui-checkbox-on {
+#lblPriNinka.ui-checkbox-on {
 	background-color: #6EE100;
+}
+
+#lblPubNinka.ui-checkbox-on {
+	background-color: #44AA00;
 }
 
 #lblNinkagai.ui-checkbox-on {
-	background-color: #0362A0;
+	background-color: #6EE100;
 }
 
 #lblYhoiku.ui-checkbox-on {
-	background-color: #6EE100;
+	background-color: #0488EE;
 }
 
 #lblKindergarten.ui-checkbox-on {
