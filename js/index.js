@@ -223,6 +223,11 @@ $('#mainPage').on('pageshow', function() {
 		papamamap.switchLayer(this.id, $(this).prop('checked'));
 	});
 
+	// 横浜保育室チェックボックスのイベント設定
+	$('#cbYhoiku').click(function() {
+		papamamap.switchLayer(this.id, $(this).prop('checked'));
+	});
+
 	// 中学校区チェックボックスのイベント定義
 	$('#cbMiddleSchool').click(function() {
 		layer = map.getLayers().item(1);
@@ -306,7 +311,7 @@ $('#mainPage').on('pageshow', function() {
 	$('#filterApply').click(function(evt){
 		// 条件作成処理
 		conditions = [];
-		ninka = ninkagai = kindergarten = false;
+		ninka = ninkagai = yhoiku = kindergarten = false;
 
 		// 認可保育園
 		if($('#ninkaOpenTime option:selected').val() !== "") {
@@ -352,6 +357,8 @@ $('#mainPage').on('pageshow', function() {
 			ninkagai = true;
 		}
 
+		// 横浜保育室
+
 		// 幼稚園
 
 		// フィルター適用時
@@ -363,11 +370,11 @@ $('#mainPage').on('pageshow', function() {
 		} else {
 			papamamap.addNurseryFacilitiesLayer(nurseryFacilities);
 			$('#btnFilter').css('background-color', '#f6f6f6');
-			ninka = ninkagai = kindergarten = true;
+			ninka = ninkagai = yhoiku = kindergarten = true;
 		}
 
 		// レイヤー表示状態によって施設の表示を切り替える
-		updateLayerStatus({ninka: ninka, ninkagai: ninkagai, kindergarten: kindergarten});
+		updateLayerStatus({ninka: ninka, ninkagai: ninkagai, yhoiku: yhoiku, kindergarten: kindergarten});
 	});
 
 	// 絞込条件のリセット
@@ -386,7 +393,7 @@ $('#mainPage').on('pageshow', function() {
 		$('#btnFilter').css('background-color', '#f6f6f6');
 
 		// レイヤー表示状態によって施設の表示を切り替える
-		updateLayerStatus({ninka: true, ninkagai: true, kindergarten: true});
+		updateLayerStatus({ninka: true, ninkagai: true, yhoiku: true, kindergarten: true});
 	});
 
 	/**
@@ -399,9 +406,11 @@ $('#mainPage').on('pageshow', function() {
 	{
 		papamamap.switchLayer($('#cbNinka').prop('id'), checkObj.ninka);
 		papamamap.switchLayer($('#cbNinkagai').prop('id'), checkObj.ninkagai);
+		papamamap.switchLayer($('#cbYhoiku').prop('id'), checkObj.yhoiku);
 		papamamap.switchLayer($('#cbKindergarten').prop('id'), checkObj.kindergarten);
 		$('#cbNinka').prop('checked', checkObj.ninka).checkboxradio('refresh');
 		$('#cbNinkagai').prop('checked', checkObj.ninkagai).checkboxradio('refresh');
+		$('#cbYhoiku').prop('checked', checkObj.yhoiku).checkboxradio('refresh');
 		$('#cbKindergarten').prop('checked', checkObj.kindergarten).checkboxradio('refresh');
 	}
 

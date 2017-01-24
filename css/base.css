@@ -32,6 +32,10 @@
 	background-color: #0362A0;
 }
 
+#lblYhoiku.ui-checkbox-on {
+	background-color: #6EE100;
+}
+
 #lblKindergarten.ui-checkbox-on {
 	background-color: #FF5C24;
 }
