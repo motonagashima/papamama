@@ -15,15 +15,14 @@ MoveToList.prototype.loadStationJson = function()
             moveToList.push( {name: "公共交通機関施設", header:true} );
             var lineName = "";
             for(var i=0; i<data.features.length; i++) {
-                //_s = data.features[i].properties["N05_003"] + " (" + data.features[i].properties["N05_002"] + ")";
-                _s = data.features[i].properties["N05_002"];
+                _s = data.features[i].properties["N05_003"] + " (" + data.features[i].properties["N05_002"] + ")";
                 if(lineName !== _s) {
                     moveToList.push({name: _s, header: true});
                     lineName = _s;
                 }
                 _name = data.features[i].properties.N05_011;
-                _lat  = data.features[i].properties.lat;
-                _lon  = data.features[i].properties.lon;
+                _lat  = data.features[i].geometry.coordinates[1];
+                _lon  = data.features[i].geometry.coordinates[0];
                 moveToList.push(
                     {name: _name, lat: _lat, lon: _lon, header:false}
                     );

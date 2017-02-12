@@ -33,7 +33,7 @@
 }
 
 #lblNinkagai.ui-checkbox-on {
-	background-color: #6EE100;
+	background-color: #0362A0;
 }
 
 #lblYhoiku.ui-checkbox-on {
@@ -154,4 +154,15 @@ h3 {
 
 legend {
 	margin-bottom: 0;
+}
+
+/* ToDo: 検索ボタンの修正&対応が終わるまで無効化(btn-disabled) */
+.btn-disabled {
+	pointer-events: none; /* aタグのリンクを無効にする */
+	cursor: default;  /* マウスオーバー時のカーソルをdefaultに固定 */
+	text-shadow: 0 0 0 #f3f3f3 !important; /* 文字の影 */
+	-moz-box-shadow: 0 0 0 #f3f3f3 !important; /* Firefox用 */
+	-webkit-box-shadow: 0 0 0 #f3f3f3 !important; /* Safari,Google Chrome用 */
+	background-color: #888 !important; /* 背景色 */
+	color: #aaa !important; /* 文字色 */
 }

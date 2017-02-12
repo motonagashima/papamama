@@ -312,7 +312,15 @@ $('#mainPage').on('pageshow', function() {
 		evt.stopPropagation();
 	});
 
-	// 検索フィルターを有効にする
+	/*
+    $(function(){
+        $('a.disable').click(function(){
+            return false;
+        })
+    });
+	*/
+
+    // 検索フィルターを有効にする
 	$('#filterApply').click(function(evt){
 		// 条件作成処理
 		conditions = [];
