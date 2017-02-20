@@ -442,14 +442,14 @@ Papamamap.prototype.getPopupContent = function(feature)
         content += '</tr>';
     }
     var full = feature.get('定員') ? feature.get('定員') : feature.get('Full');
-    if (full !== undefined && full !== null) {
+    if (!isUndefined(full)) {
         content += '<tr>';
         content += '<th>定員</th>';
         content += '<td>' + full + '人</td>';
         content += '</tr>';
     }
     var tel = feature.get('TEL') ? feature.get('TEL') : feature.get('TEL');
-    if (tel !== undefined && tel !== null) {
+    if (!isUndefined(tel)) {
         content += '<tr>';
         content += '<th>TEL</th>';
         content += '<td>' + tel + '</td>';
@@ -457,7 +457,7 @@ Papamamap.prototype.getPopupContent = function(feature)
     }
     var add1 = feature.get('住所１') ? feature.get('住所１') : feature.get('Add1');
     var add2 = feature.get('住所２') ? feature.get('住所２') : feature.get('Add2');
-    if (add1 !== undefined && add2 !== undefined) {
+    if (!isUndefined(add1) && !isUndefined(add2)) {
         content += '<tr>';
         content += '<th>住所</th>';
         content += '<td>' + add1 + add2 +'</td>';
