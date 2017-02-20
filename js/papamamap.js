@@ -457,7 +457,7 @@ Papamamap.prototype.getPopupContent = function(feature)
     }
     var add1 = feature.get('住所１') ? feature.get('住所１') : feature.get('Add1');
     var add2 = feature.get('住所２') ? feature.get('住所２') : feature.get('Add2');
-    if (!isUndefined(add1) && !isUndefined(add2)) {
+    if (!isUndefined(add1) || !isUndefined(add2)) {
         content += '<tr>';
         content += '<th>住所</th>';
         content += '<td>' + add1 + add2 +'</td>';
