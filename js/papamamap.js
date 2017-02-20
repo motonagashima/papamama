@@ -386,20 +386,20 @@ Papamamap.prototype.getPopupContent = function(feature)
     var night   = feature.get('夜間') ? feature.get('夜間') : feature.get('Night');
     var h24     = feature.get('H24') ? feature.get('H24') : feature.get('H24');
 
-    if( temp !== null || holiday !== null || night !== null || h24 !== null) {
+    if( !isUndefined(temp) || !isUndefined(holiday) || !isUndefined(night) || !isUndefined(h24)) {
         content += '<tr>';
         content += '<th></th>';
         content += '<td>';
-        if (temp !== undefined && temp !== null) {
-            content += temp;
+        if (formatNull(temp) !== null) {
+            content += '一時保育 ';
         }
-        if (holiday !== undefined && holiday !== null) {
+        if (formatNull(holiday) !== null) {
             content += '休日保育 ';
         }
-        if (night !== undefined && night !== null) {
+        if (formatNull(night) !== null) {
             content += '夜間保育 ';
         }
-        if (h24 !== undefined && h24 !== null) {
+        if (formatNull(h24) !== null) {
             content += '24時間 ';
         }
         content += '</td>';
@@ -473,6 +473,35 @@ Papamamap.prototype.getPopupContent = function(feature)
     content += '</tbody></table>';
     return content;
 };
+
+/**
+* 空文字判定関数
+* 　引数が未定義、null、空文字いずれかの場合はnullを返却する
+* 　それ以外の時はparamを返却する
+* @param {[type]}
+* @return {[type]}
+**/
+function formatNull(param){
+  if(param == null || param == undefined || param ==""){
+    return null;
+  } else {
+    return param;
+  }
+}
+
+/**
+* 未定義カラム判定関数
+* 　引数が未定義、null、空文字いずれかの場合はtrueを返却する
+* @param {[type]}
+* @return {[type]}
+**/
+function isUndefined(param){
+  if(param == null || param == undefined || param ==""){
+    return true;
+  } else {
+    return false;
+  }
+}
 
 /**
  * 円を消す
