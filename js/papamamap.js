@@ -386,20 +386,20 @@ Papamamap.prototype.getPopupContent = function(feature)
     var night   = feature.get('夜間') ? feature.get('夜間') : feature.get('Night');
     var h24     = feature.get('H24') ? feature.get('H24') : feature.get('H24');
 
-    if( temp !== "" || holiday !== "" || night !== "" || h24 !== "") {
+    if( temp !== null || holiday !== null || night !== null || h24 !== null) {
         content += '<tr>';
         content += '<th></th>';
         content += '<td>';
-        if (temp !== undefined && temp !== "") {
-            content += '一時保育 ';
+        if (temp !== undefined && temp !== null) {
+            content += temp;
         }
-        if (holiday !== undefined && holiday !== "") {
+        if (holiday !== undefined && holiday !== null) {
             content += '休日保育 ';
         }
-        if (night !== undefined && night !== "") {
+        if (night !== undefined && night !== null) {
             content += '夜間保育 ';
         }
-        if (h24 !== undefined && h24 !== "") {
+        if (h24 !== undefined && h24 !== null) {
             content += '24時間 ';
         }
         content += '</td>';
