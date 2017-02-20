@@ -435,7 +435,7 @@ Papamamap.prototype.getPopupContent = function(feature)
     }
     var ageS = feature.get('開始年齢') ? feature.get('開始年齢') : feature.get('AgeS');
     var ageE = feature.get('終了年齢') ? feature.get('終了年齢') : feature.get('AgeE');
-    if (ageS !== undefined && ageS !== null && ageE !== undefined && ageE !== null) {
+    if (!isUndefined(ageS) && !isUndefined(ageE)) {
         content += '<tr>';
         content += '<th>年齢</th>';
         content += '<td>' + ageS + '〜' + ageE + '</td>';
@@ -464,7 +464,7 @@ Papamamap.prototype.getPopupContent = function(feature)
         content += '</tr>';
     }
     var owner = feature.get('設置者') ? feature.get('設置者') : feature.get('Owner');
-    if (owner !== undefined && owner !== null) {
+    if (!isUndefined(owner)) {
         content += '<tr>';
         content += '<th>設置者</th>';
         content += '<td>' + owner + '</td>';
@@ -472,36 +472,36 @@ Papamamap.prototype.getPopupContent = function(feature)
     }
     content += '</tbody></table>';
     return content;
+
+    /**
+    * 空文字判定関数
+    * 　引数が未定義、null、空文字いずれかの場合はnullを返却する
+    * 　それ以外の時はparamを返却する
+    * @param {[type]}
+    * @return {[type]}
+    **/
+    function formatNull(param){
+      if(param == null || param == undefined || param ==""){
+        return null;
+      } else {
+        return param;
+      }
+    }
+
+    /**
+    * 未定義カラム判定関数
+    * 　引数が未定義、null、空文字いずれかの場合はtrueを返却する
+    * @param {[type]}
+    * @return {[type]}
+    **/
+    function isUndefined(param){
+      if(param == null || param == undefined || param ==""){
+        return true;
+      } else {
+        return false;
+      }
+    }
 };
-
-/**
-* 空文字判定関数
-* 　引数が未定義、null、空文字いずれかの場合はnullを返却する
-* 　それ以外の時はparamを返却する
-* @param {[type]}
-* @return {[type]}
-**/
-function formatNull(param){
-  if(param == null || param == undefined || param ==""){
-    return null;
-  } else {
-    return param;
-  }
-}
-
-/**
-* 未定義カラム判定関数
-* 　引数が未定義、null、空文字いずれかの場合はtrueを返却する
-* @param {[type]}
-* @return {[type]}
-**/
-function isUndefined(param){
-  if(param == null || param == undefined || param ==""){
-    return true;
-  } else {
-    return false;
-  }
-}
 
 /**
  * 円を消す
