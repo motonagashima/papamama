@@ -144,7 +144,7 @@ Papamamap.prototype.animatedMove = function(lon, lat, isTransform)
 
 
 /**
- * 指定したgeojsonデータを元に認可外・私立認可・公立認可・幼稚園・横浜保育室レイヤーを描写する
+ * 指定したgeojsonデータを元に公立認可・私立認可・小規模等・横浜保育室・認可外・幼稚園レイヤーを描写する
  *
  * @param {[type]} facilitiesData [description]
  */
@@ -209,6 +209,17 @@ Papamamap.prototype.addNurseryFacilitiesLayer = function(facilitiesData)
             }),
             name: 'layerYhoiku',
             style: yhoikuStyleFunction
+        })
+    );
+    // 小規模・事業所内保育事業
+    this.map.addLayer(
+        new ol.layer.Vector({
+            source: new ol.source.GeoJSON({
+                projection: 'EPSG:3857',
+                object: facilitiesData
+            }),
+            name: 'layerJigyosho',
+            style: jigyoshoStyleFunction
         })
     );
 };
@@ -407,7 +418,7 @@ Papamamap.prototype.getPopupContent = function(feature)
     }
 
     var type = feature.get('種別') ? feature.get('種別') : feature.get('Type');
-    if(type == "認可外") {
+    if(type == "認可外保育施設") {
         content += '<tr>';
         content += '<th>監督基準</th>';
         content += '<td>';
@@ -418,7 +429,7 @@ Papamamap.prototype.getPopupContent = function(feature)
         content += '</td>';
         content += '</tr>';
     }
-    if(type == "私立認可") {
+    if(type == "私立認可保育所") {
         content += '<tr>';
         content += '<th>欠員</th>';
         content += '<td>';
