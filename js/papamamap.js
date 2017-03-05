@@ -145,12 +145,16 @@ Papamamap.prototype.animatedMove = function(lon, lat, isTransform)
 
 /**
  * 指定したgeojsonデータを元に公立認可・私立認可・小規模等・横浜保育室・認可外・幼稚園レイヤーを描写する
+ *    ※上記以外に描写レイヤーを追加する時は、下の this.map.removeLayer(this.map.getLayers().item(4)); も追加レイヤーの数だけ追加してください！
  *
  * @param {[type]} facilitiesData [description]
  */
 Papamamap.prototype.addNurseryFacilitiesLayer = function(facilitiesData)
 {
     if(this.map.getLayers().getLength() >= 4) {
+        this.map.removeLayer(this.map.getLayers().item(4));
+        this.map.removeLayer(this.map.getLayers().item(4));
+        this.map.removeLayer(this.map.getLayers().item(4));
         this.map.removeLayer(this.map.getLayers().item(4));
         this.map.removeLayer(this.map.getLayers().item(4));
         this.map.removeLayer(this.map.getLayers().item(4));
