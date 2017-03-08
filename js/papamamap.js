@@ -424,7 +424,7 @@ Papamamap.prototype.getPopupContent = function(feature)
         content += '<td>';
         var proof = feature.get('証明') ? feature.get('証明') : feature.get('Proof');
         if (proof !== undefined && proof !== null) {
-            content += '証明書発行済<a href="http://www.city.sapporo.jp/kodomo/kosodate/ninkagai_shisetsu.html" target="_blank">(詳細)</a>';
+            content += '証明書発行済';
         }
         content += '</td>';
         content += '</tr>';
