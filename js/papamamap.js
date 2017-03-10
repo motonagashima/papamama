@@ -472,36 +472,36 @@ Papamamap.prototype.getPopupContent = function(feature)
     }
     content += '</tbody></table>';
     return content;
-
-    /**
-    * 空文字判定関数
-    * 　引数が未定義、null、空文字いずれかの場合はnullを返却する
-    * 　それ以外の時はparamを返却する
-    * @param {[type]}
-    * @return {[type]}
-    **/
-    function formatNull(param){
-      if(param == null || param == undefined || param ==""){
-        return null;
-      } else {
-        return param;
-      }
-    }
-
-    /**
-    * 未定義カラム判定関数
-    * 　引数が未定義、null、空文字いずれかの場合はtrueを返却する
-    * @param {[type]}
-    * @return {[type]}
-    **/
-    function isUndefined(param){
-      if(param == null || param == undefined || param ==""){
-        return true;
-      } else {
-        return false;
-      }
-    }
 };
+
+/**
+* 空文字判定関数
+* 　引数が未定義、null、空文字いずれかの場合はnullを返却する
+* 　それ以外の時はparamを返却する
+* @param {[type]}
+* @return {[type]}
+**/
+function formatNull(param){
+  if(param == null || param == undefined || param ==""){
+    return null;
+  } else {
+    return param;
+  }
+}
+
+/**
+* 未定義カラム判定関数
+* 　引数が未定義、null、空文字いずれかの場合はtrueを返却する
+* @param {[type]}
+* @return {[type]}
+**/
+function isUndefined(param){
+  if(param == null || param == undefined || param ==""){
+    return true;
+  } else {
+    return false;
+  }
+}
 
 /**
  * 円を消す
