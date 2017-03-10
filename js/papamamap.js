@@ -418,17 +418,6 @@ Papamamap.prototype.getPopupContent = function(feature)
     }
 
     var type = feature.get('種別') ? feature.get('種別') : feature.get('Type');
-    if(type == "認可外保育施設") {
-        content += '<tr>';
-        content += '<th>監督基準</th>';
-        content += '<td>';
-        var proof = feature.get('証明') ? feature.get('証明') : feature.get('Proof');
-        if (proof !== undefined && proof !== null) {
-            content += '証明書発行済';
-        }
-        content += '</td>';
-        content += '</tr>';
-    }
     if(type == "私立認可保育所") {
         content += '<tr>';
         content += '<th>欠員</th>';
