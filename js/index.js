@@ -233,6 +233,11 @@ $('#mainPage').on('pageshow', function() {
 		papamamap.switchLayer(this.id, $(this).prop('checked'));
 	});
 
+	// 小規模・事業所内保育事業チェックボックスのイベント設定
+	$('#cbJigyosho').click(function() {
+		papamamap.switchLayer(this.id, $(this).prop('checked'));
+	});
+
 	// 中学校区チェックボックスのイベント定義
 	$('#cbMiddleSchool').click(function() {
 		layer = map.getLayers().item(1);
@@ -324,9 +329,9 @@ $('#mainPage').on('pageshow', function() {
 	$('#filterApply').click(function(evt){
 		// 条件作成処理
 		conditions = [];
-		ninka = ninkagai = yhoiku = kindergarten = false;
+		ninka = ninkagai = yhoiku = kindergarten = jigyosho = false;
 
-		// 認可保育園
+		// 認可保育園：公立認可・私立認可の変更未対応
 		if($('#ninkaOpenTime option:selected').val() !== "") {
 			conditions['ninkaOpenTime'] = $('#ninkaOpenTime option:selected').val();
 			ninka = true;
@@ -370,7 +375,9 @@ $('#mainPage').on('pageshow', function() {
 			ninkagai = true;
 		}
 
-		// 横浜保育室
+		// 横浜保育室：未対応
+
+		// 小規模・事業所内保育事業：未対応
 
 		// 幼稚園
 
@@ -383,11 +390,11 @@ $('#mainPage').on('pageshow', function() {
 		} else {
 			papamamap.addNurseryFacilitiesLayer(nurseryFacilities);
 			$('#btnFilter').css('background-color', '#f6f6f6');
-			ninka = ninkagai = yhoiku = kindergarten = true;
+			ninka = ninkagai = yhoiku = kindergarten = jigyosho = true;
 		}
 
 		// レイヤー表示状態によって施設の表示を切り替える
-		updateLayerStatus({ninka: ninka, ninkagai: ninkagai, yhoiku: yhoiku, kindergarten: kindergarten});
+		updateLayerStatus({ninka: ninka, ninkagai: ninkagai, yhoiku: yhoiku, kindergarten: kindergarten, jigyosho: jigyosho});
 	});
 
 	// 絞込条件のリセット
@@ -406,7 +413,7 @@ $('#mainPage').on('pageshow', function() {
 		$('#btnFilter').css('background-color', '#f6f6f6');
 
 		// レイヤー表示状態によって施設の表示を切り替える
-		updateLayerStatus({ninka: true, ninkagai: true, yhoiku: true, kindergarten: true});
+		updateLayerStatus({ninka: true, ninkagai: true, yhoiku: true, kindergarten: true, jigyosho: true});
 	});
 
 	/**
@@ -422,11 +429,13 @@ $('#mainPage').on('pageshow', function() {
 		papamamap.switchLayer($('#cbNinkagai').prop('id'), checkObj.ninkagai);
 		papamamap.switchLayer($('#cbYhoiku').prop('id'), checkObj.yhoiku);
 		papamamap.switchLayer($('#cbKindergarten').prop('id'), checkObj.kindergarten);
+		papamamap.switchLayer($('#cbJigyosho').prop('id'), checkObj.jigyosho);
 		$('#cbPriNinka').prop('checked', checkObj.priNinka).checkboxradio('refresh');
 		$('#cbPubNinka').prop('checked', checkObj.pubNinka).checkboxradio('refresh');
 		$('#cbNinkagai').prop('checked', checkObj.ninkagai).checkboxradio('refresh');
 		$('#cbYhoiku').prop('checked', checkObj.yhoiku).checkboxradio('refresh');
 		$('#cbKindergarten').prop('checked', checkObj.kindergarten).checkboxradio('refresh');
+		$('#cbJigyosho').prop('checked', checkObj.jigyosho).checkboxradio('refresh');
 	}
 
 	/**

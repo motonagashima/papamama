@@ -4,11 +4,12 @@
  */
 var featureStyleList = {
 	'default': { color: 'rgba(153, 153, 153, 1)', img: 'image/018.png'},
-	'認可外': { color: '#0362A0', img: 'image/019.png'},
+	'認可外保育施設': { color: '#0362A0', img: 'image/019.png'},
 	'幼稚園': { color: '#FF5C24', img: 'image/029.png'},
-	'私立認可': { color: '#6EE100', img: 'image/018.png'},
-	'公立認可': { color: '#44AA00', img: 'image/018.png'},
-	'横浜保育室': { color: '#0488EE', img: 'image/018.png'}
+	'私立認可保育所': { color: '#6EE100', img: 'image/018.png'},
+	'公立認可保育所': { color: '#44AA00', img: 'image/018.png'},
+	'横浜保育室': { color: '#0488EE', img: 'image/018.png'},
+	'小規模・事業所内保育事業': { color: '#6DBA9C', img: 'image/018.png'}
 };
 
 /**
@@ -21,7 +22,7 @@ var priNinkaStyleFunction = function(feature, resolution)
 {
 	var facilityTypeName = feature.get('種別') ? feature.get('種別') : feature.get('Type');
 	var style = [];
-	if(facilityTypeName === "私立認可") {
+	if(facilityTypeName === "私立認可保育所") {
 		featureStyle = featureStyleList[facilityTypeName];
 		style        = nurseryStyleFunction(feature, resolution, featureStyle);
 	}
@@ -38,7 +39,7 @@ var pubNinkaStyleFunction = function(feature, resolution)
 {
 	var facilityTypeName = feature.get('種別') ? feature.get('種別') : feature.get('Type');
 	var style = [];
-	if(facilityTypeName === "公立認可") {
+	if(facilityTypeName === "公立認可保育所") {
 		featureStyle = featureStyleList[facilityTypeName];
 		style        = nurseryStyleFunction(feature, resolution, featureStyle);
 	}
@@ -55,7 +56,7 @@ var ninkagaiStyleFunction = function(feature, resolution)
 {
 	var facilityTypeName = feature.get('種別') ? feature.get('種別') : feature.get('Type');
 	var style = [];
-	if(facilityTypeName === "認可外") {
+	if(facilityTypeName === "認可外保育施設") {
 		featureStyle = featureStyleList[facilityTypeName];
 		style        = nurseryStyleFunction(feature, resolution, featureStyle);
 	}
@@ -90,6 +91,23 @@ var yhoikuStyleFunction = function(feature, resolution)
 	var facilityTypeName = feature.get('種別') ? feature.get('種別') : feature.get('Type');
 	var style = [];
 	if(facilityTypeName === "横浜保育室") {
+		featureStyle = featureStyleList[facilityTypeName];
+		style        = nurseryStyleFunction(feature, resolution, featureStyle);
+	}
+	return style;
+};
+
+/**
+ * 小規模・事業所内保育事業向けスタイル
+ * @param  {[type]} feature    [description]
+ * @param  {[type]} resolution [description]
+ * @return {[type]}            [description]
+ */
+var jigyoshoStyleFunction = function(feature, resolution)
+{
+	var facilityTypeName = feature.get('種別') ? feature.get('種別') : feature.get('Type');
+	var style = [];
+	if(facilityTypeName === "小規模・事業所内保育事業") {
 		featureStyle = featureStyleList[facilityTypeName];
 		style        = nurseryStyleFunction(feature, resolution, featureStyle);
 	}

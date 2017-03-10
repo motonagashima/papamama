@@ -40,6 +40,10 @@
 	background-color: #0488EE;
 }
 
+#lblJigyosho.ui-checkbox-on {
+	background-color: #6DBA9C;
+}
+
 #lblKindergarten.ui-checkbox-on {
 	background-color: #FF5C24;
 }

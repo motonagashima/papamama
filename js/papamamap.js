@@ -144,7 +144,7 @@ Papamamap.prototype.animatedMove = function(lon, lat, isTransform)
 
 
 /**
- * 指定したgeojsonデータを元に認可外・私立認可・公立認可・幼稚園・横浜保育室レイヤーを描写する
+ * 指定したgeojsonデータを元に公立認可・私立認可・小規模等・横浜保育室・認可外・幼稚園レイヤーを描写する
  *
  * @param {[type]} facilitiesData [description]
  */
@@ -209,6 +209,17 @@ Papamamap.prototype.addNurseryFacilitiesLayer = function(facilitiesData)
             }),
             name: 'layerYhoiku',
             style: yhoikuStyleFunction
+        })
+    );
+    // 小規模・事業所内保育事業
+    this.map.addLayer(
+        new ol.layer.Vector({
+            source: new ol.source.GeoJSON({
+                projection: 'EPSG:3857',
+                object: facilitiesData
+            }),
+            name: 'layerJigyosho',
+            style: jigyoshoStyleFunction
         })
     );
 };
@@ -407,27 +418,16 @@ Papamamap.prototype.getPopupContent = function(feature)
     }
 
     var type = feature.get('種別') ? feature.get('種別') : feature.get('Type');
-    if(type == "認可外") {
-        content += '<tr>';
-        content += '<th>監督基準</th>';
-        content += '<td>';
-        var proof = feature.get('証明') ? feature.get('証明') : feature.get('Proof');
-        if (proof !== undefined && proof !== null) {
-            content += '証明書発行済<a href="http://www.city.sapporo.jp/kodomo/kosodate/ninkagai_shisetsu.html" target="_blank">(詳細)</a>';
-        }
-        content += '</td>';
-        content += '</tr>';
-    }
-    if(type == "私立認可") {
+    if(type == "私立認可保育所") {
         content += '<tr>';
         content += '<th>欠員</th>';
         content += '<td>';
         var vacancy = feature.get('Vacancy') ? feature.get('Vacancy') : feature.get('Vacancy');
         if (vacancy !== undefined && vacancy !== null) {
-            content += '<a href="http://www.city.yokohama.lg.jp/kohoku/sabisu/hoiku/" target="_blank">空きあり</a>';
+            content += '<a href="http://www.city.yokohama.lg.jp/kohoku/sabisu/hoiku/" target="_blank">空き情報</a>';
         }
         var vacancyDate = feature.get('VacancyDate');
-        if (vacancyDate !== undefined && vacancyDate !== null) {
+        if (!isUndefined(vacancyDate)) {
             content += " (" + vacancyDate + ")";
         }
         content += '</td>';
