@@ -358,13 +358,13 @@ Papamamap.prototype.getPopupTitle = function(feature)
     var type = feature.get('種別') ? feature.get('種別') : feature.get('Type');
     title  = '[' + type + '] ';
     var owner = feature.get('設置') ? feature.get('設置') : feature.get('Ownership');
-    if(owner !== undefined && owner !== null && owner !== "") {
+    if(!isUndefined(owner)) {
         title += ' [' + owner +']';
     }
     var name = feature.get('名称') ? feature.get('名称') : feature.get('Name');
     title += name;
     url = feature.get('url');
-    if(url !== null && url !='') {
+    if(!isUndefined(url)) {
         title = '<a href="' +url+ '" target="_blank">' + title + '</a>';
     }
     return title;
@@ -381,7 +381,7 @@ Papamamap.prototype.getPopupContent = function(feature)
     content = '<table><tbody>';
     var open  = feature.get('開園時間') ? feature.get('開園時間') : feature.get('Open');
     var close = feature.get('終園時間') ? feature.get('終園時間') : feature.get('Close');
-    if (open != undefined && open !== null && open !== "" && close !== undefined && close !== null && close !== "") {
+    if (!isUndefined(open) && !isUndefined(close)) {
         content += '<tr>';
         content += '<th>時間</th>';
         content += '<td>';
@@ -390,7 +390,7 @@ Papamamap.prototype.getPopupContent = function(feature)
         content += '</tr>';
     }
     var memo = feature.get('備考') ? feature.get('備考') : feature.get('Memo');
-    if (memo !== undefined && memo !== null) {
+    if (!isUndefined(memo)) {
         content += '<tr>';
         content += '<th></th>';
         content += '<td>' + memo + '</td>';
@@ -427,7 +427,7 @@ Papamamap.prototype.getPopupContent = function(feature)
         content += '<th>欠員</th>';
         content += '<td>';
         var vacancy = feature.get('Vacancy') ? feature.get('Vacancy') : feature.get('Vacancy');
-        if (vacancy !== undefined && vacancy !== null) {
+        if (!isUndefined(vacancy)) {
             content += '<a href="http://www.city.yokohama.lg.jp/kohoku/sabisu/hoiku/" target="_blank">空き情報</a>';
         }
         var vacancyDate = feature.get('VacancyDate');
@@ -476,36 +476,36 @@ Papamamap.prototype.getPopupContent = function(feature)
     }
     content += '</tbody></table>';
     return content;
-
-    /**
-    * 空文字判定関数
-    * 　引数が未定義、null、空文字いずれかの場合はnullを返却する
-    * 　それ以外の時はparamを返却する
-    * @param {[type]}
-    * @return {[type]}
-    **/
-    function formatNull(param){
-      if(param == null || param == undefined || param ==""){
-        return null;
-      } else {
-        return param;
-      }
-    }
-
-    /**
-    * 未定義カラム判定関数
-    * 　引数が未定義、null、空文字いずれかの場合はtrueを返却する
-    * @param {[type]}
-    * @return {[type]}
-    **/
-    function isUndefined(param){
-      if(param == null || param == undefined || param ==""){
-        return true;
-      } else {
-        return false;
-      }
-    }
 };
+
+/**
+* 空文字判定関数
+* 　引数が未定義、null、空文字いずれかの場合はnullを返却する
+* 　それ以外の時はparamを返却する
+* @param {[type]}
+* @return {[type]}
+**/
+function formatNull(param){
+  if(param == null || param == undefined || param ==""){
+    return null;
+  } else {
+    return param;
+  }
+}
+
+/**
+* 未定義カラム判定関数
+* 　引数が未定義、null、空文字いずれかの場合はtrueを返却する
+* @param {[type]}
+* @return {[type]}
+**/
+function isUndefined(param){
+  if(param == null || param == undefined || param ==""){
+    return true;
+  } else {
+    return false;
+  }
+}
 
 /**
  * 円を消す
