@@ -52,7 +52,9 @@
                     <input type="checkbox" name="cbMiddleSchool" id="cbMiddleSchool">
 
                     <!-- ToDo: 検索ボタンの修正&対応が終わるまで無効化 (btn-disabled) -->
-                    <a id="btnFilter" href="#filterdialog" data-rel="popup" data-position-to="window" class="btn-disabled ui-btn ui-corner-all ui-btn-a ui-icon-filter ui-btn-icon-right ui-icon-checkv">検索</a>
+                    <!-- 2017/02/25 kakiki-upd 検索機能確認の為ボタンを有効化 -->
+                    <!--                    <a id="btnFilter" href="#filterdialog" data-rel="popup" data-position-to="window" class="btn-disabled ui-btn ui-corner-all ui-btn-a ui-icon-filter ui-btn-icon-right ui-icon-checkv">検索</a>                    -->
+                    <a id="btnFilter" href="#filterdialog" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-btn-a ui-icon-filter ui-btn-icon-right ui-icon-check">検索</a>
 
                     <label for="changeBaseMap">背景</label>
                     <select id="changeBaseMap" data-mini="true">
@@ -97,44 +99,133 @@
             <form>
                 <div style="padding:10px 20px;">
                     <h3>保育施設 絞り込み</h3>
-                    <legend>認可保育園</legend>
+                    <!-- 2017-02 @kakiki upd&ins-st -->
+                    <legend>公立認可保育園</legend>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <label for="ninkaOpenTime" class="select">開園</label>
-                        <select id="ninkaOpenTime" class="filtersb">
+                        <label for="PubNinkaOpenTime" class="select">開園</label>
+                        <select id="PubNinkaOpenTime" class="filtersb">
                             <option value="">開園</option>
+                            <!-- 2017-02 kakiki-upd
                             <option value="7">7:00</option>
+                            -->
+                            <option value="7">7:00以前</option>
+                            <option value="8">8:00以前</option>
+                            <option value="9">9:00以前</option>
                         </select>
-                        <label for="ninkaCloseTime" class="select">終園</label>
-                        <select id="ninkaCloseTime" class="filtersb">
+                        <label for="PubNinkaCloseTime" class="select">終園</label>
+                        <select id="PubNinkaCloseTime" class="filtersb">
                             <option value="">終園</option>
                             <option value="18">18:00以降</option>
                             <option value="19">19:00以降</option>
                             <option value="20">20:00以降</option>
                             <option value="22">22:00以降</option>
-                            <option value="24">00:00</option>
+                            <option value="24">00:00以降</option>
                         </select>
+                    <!--
                     </fieldset>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <label for="ninkaIchijiHoiku">一時保育</label>
-                        <input type="checkbox" id="ninkaIchijiHoiku" class="filtercb">
-                        <label for="ninkaYakan">夜間</label>
-                        <input type="checkbox" id="ninkaYakan" class="filtercb">
-                        <label for="ninkaKyujitu">休日</label>
-                        <input type="checkbox" id="ninkaKyujitu" class="filtercb">
+                    -->
+                        <label for="PubNinkaIchijiHoiku">一時保育</label>
+                        <input type="checkbox" id="PubNinkaIchijiHoiku" class="filtercb">
+                        <label for="PubNinkaYakan">夜間</label>
+                        <input type="checkbox" id="PubNinkaYakan" class="filtercb">
+                        <label for="PubNinkaKyujitu">休日</label>
+                        <input type="checkbox" id="PubNinkaKyujitu" class="filtercb">
                     </fieldset>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <label for="ninkaVacancy">空きあり（試用版。最新の空き状況ではありません）</label>
-                        <input type="checkbox" id="ninkaVacancy" class="filtercb">
+                        <label for="PubNinkaVacancy">空きあり（試用版。最新の空き状況ではありません）</label>
+                        <input type="checkbox" id="PubNinkaVacancy" class="filtercb">
                     </fieldset>
+
+                    <legend>私立認可保育園</legend>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <label for="PriNinkaOpenTime" class="select">開園</label>
+                        <select id="PriNinkaOpenTime" class="filtersb">
+                            <option value="">開園</option>
+                            <!-- 2017-02 kakiki-upd
+                            <option value="7">7:00</option>
+                            -->
+                            <option value="7">7:00以前</option>
+                            <option value="8">8:00以前</option>
+                            <option value="9">9:00以前</option>
+                        </select>
+                        <label for="PriNinkaCloseTime" class="select">終園</label>
+                        <select id="PriNinkaCloseTime" class="filtersb">
+                            <option value="">終園</option>
+                            <option value="18">18:00以降</option>
+                            <option value="19">19:00以降</option>
+                            <option value="20">20:00以降</option>
+                            <option value="22">22:00以降</option>
+                            <option value="24">00:00以降</option>
+                        </select>
+                    <!--
+                    </fieldset>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    -->
+                        <label for="PriNinkaIchijiHoiku">一時保育</label>
+                        <input type="checkbox" id="PriNinkaIchijiHoiku" class="filtercb">
+                        <label for="PriNinkaYakan">夜間</label>
+                        <input type="checkbox" id="PriNinkaYakan" class="filtercb">
+                        <label for="PriNinkaKyujitu">休日</label>
+                        <input type="checkbox" id="PriNinkaKyujitu" class="filtercb">
+                    </fieldset>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <label for="PriNinkaVacancy">空きあり（試用版。最新の空き状況ではありません）</label>
+                        <input type="checkbox" id="PriNinkaVacancy" class="filtercb">
+                    </fieldset>
+
+                    <legend>横浜保育室</legend>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <label for="YhoikuOpenTime" class="select">開園</label>
+                        <select id="YhoikuOpenTime" class="filtersb">
+                            <option value="">開園</option>
+                            <!-- 2017-02 kakiki-upd
+                            <option value="7">7:00</option>
+                            -->
+                            <option value="7">7:00以前</option>
+                            <option value="8">8:00以前</option>
+                            <option value="9">9:00以前</option>
+                        </select>
+                        <label for="YhoikuCloseTime" class="select">終園</label>
+                        <select id="YhoikuCloseTime" class="filtersb">
+                            <option value="">終園</option>
+                            <option value="18">18:00以降</option>
+                            <option value="19">19:00以降</option>
+                            <option value="20">20:00以降</option>
+                            <option value="22">22:00以降</option>
+                            <option value="24">00:00以降</option>
+                        </select>
+                    <!--
+                    </fieldset>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    -->
+                        <label for="YhoikuIchijiHoiku">一時保育</label>
+                        <input type="checkbox" id="YhoikuIchijiHoiku" class="filtercb">
+                        <label for="YhoikuYakan">夜間</label>
+                        <input type="checkbox" id="YhoikuYakan" class="filtercb">
+                        <label for="YhoikuKyujitu">休日</label>
+                        <input type="checkbox" id="YhoikuKyujitu" class="filtercb">
+                    </fieldset>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <label for="YhoikuVacancy">空きあり（試用版。最新の空き状況ではありません）</label>
+                        <input type="checkbox" id="YhoikuVacancy" class="filtercb">
+                    </fieldset>
+                    <!-- 2017-02-25 @kakiki upd&ins-end -->
+
                     <legend>認可外保育園</legend>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <label for="ninkagaiOpenTime" class="select">開園</label>
                         <select id="ninkagaiOpenTime" class="filtersb">
                             <option value="">開園</option>
+                            <!-- 2017-02 kakiki-upd
                             <option value="7:00">7:00</option>
                             <option value="7:30">7:30以前</option>
                             <option value="7:45">7:45以前</option>
                             <option value="8:00">8:00以前</option>
+                            -->
+                            <option value="7">7:00以前</option>
+                            <option value="8">8:00以前</option>
+                            <option value="9">9:00以前</option>
                         </select>
                         <label for="ninkagaiCloseTime" class="select">終園</label>
                         <select id="ninkagaiCloseTime" class="filtersb">
@@ -143,15 +234,17 @@
                             <option value="19">19:00以降</option>
                             <option value="20">20:00以降</option>
                             <option value="22">22:00以降</option>
-                            <option value="27">03:00</option>
+                            <option value="24">00:00以降</option>
                         </select>
                         <label for="ninkagai24H">24時間</label>
                         <input type="checkbox" id="ninkagai24H" class="filtercb">
                     </fieldset>
+                    <!-- //2017-02 kakiki-del
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <label for="ninkagaiShomei">証明書あり</label>
                     <input type="checkbox" id="ninkagaiShomei" class="filtercb">
                     </fieldset>
+                    -->
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <a href="#" data-rel="back" id="filterApply" class="ui-btn ui-corner-all ui-btn-a ui-btn-icon-left ui-icon-check">条件適用</a>
                         <a href="#" id="filterReset" class="ui-btn ui-corner-all ui-btn-a ui-btn-icon-left ui-icon-delete">リセット</a>
