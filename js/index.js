@@ -196,7 +196,7 @@ $('#mainPage').on('pageshow', function() {
 		// $('#markerTitle').hide();
 		// $('#marker').hide();
 
-		//最寄駅をクリックで駅マーカーを削除する
+		//最寄駅をクリックで駅マーカーを非表示にする
 		if ($('#moveTo option:selected').text() == "最寄駅"){
 			clearMarker();
 		} else {
@@ -579,7 +579,7 @@ $('#mainPage').on('pageshow', function() {
 	}
 
 	/**
-	 * 指定座標のマーカーを削除する
+	 * 指定座標のマーカーを非表示にする
 	 */
 	 function clearMarker() {
 		 $('#markerTitle').hide();
