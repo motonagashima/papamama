@@ -196,16 +196,21 @@ $('#mainPage').on('pageshow', function() {
 		// $('#markerTitle').hide();
 		// $('#marker').hide();
 
-		// 指定した最寄り駅に移動
-		papamamap.moveToSelectItem(moveToList[$(this).val()]);
+		//最寄駅をクリックで駅マーカーを非表示にする
+		if ($('#moveTo option:selected').text() == "最寄駅"){
+			clearMarker();
+		} else {
+			// 指定した最寄り駅に移動
+			papamamap.moveToSelectItem(moveToList[$(this).val()]);
 
-		// 地図上にマーカーを設定する
-		var lon = moveToList[$(this).val()].lon;
-		var lat = moveToList[$(this).val()].lat;
-		var label = moveToList[$(this).val()].name;
-		var pos = ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857');
-		// Vienna marker
-		drawMarker(pos, label);
+			// 地図上にマーカーを設定する
+			var lon = moveToList[$(this).val()].lon;
+			var lat = moveToList[$(this).val()].lat;
+			var label = moveToList[$(this).val()].name;
+			var pos = ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857');
+			// Vienna marker
+			drawMarker(pos, label);
+		}
 	});
 
 	// 幼稚園チェックボックスのイベント設定
@@ -573,4 +578,11 @@ $('#mainPage').on('pageshow', function() {
 		return;
 	}
 
+	/**
+	 * 指定座標のマーカーを非表示にする
+	 */
+	 function clearMarker() {
+		 $('#markerTitle').hide();
+		 $('#marker').hide();
+	 }
 });
