@@ -15,7 +15,7 @@ MoveToList.prototype.loadStationJson = function()
             moveToList.push( {name: "公共交通機関施設", header:true} );
             var lineName = "";
             for(var i=0; i<data.features.length; i++) {
-                _s = data.features[i].properties["N05_003"] + " (" + data.features[i].properties["N05_002"] + ")";
+                _s = data.features[i].properties.N05_003 + " (" + data.features[i].properties.N05_002 + ")";
                 if(lineName !== _s) {
                     moveToList.push({name: _s, header: true});
                     lineName = _s;

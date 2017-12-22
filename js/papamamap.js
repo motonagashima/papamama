@@ -425,22 +425,22 @@ Papamamap.prototype.getPopupContent = function(feature)
         content += '</tr>';
     }
 
-    var type = feature.get('種別') ? feature.get('種別') : feature.get('Type');
-    if(type == "私立認可保育所") {
-        content += '<tr>';
-        content += '<th>欠員</th>';
-        content += '<td>';
-        var vacancy = feature.get('Vacancy') ? feature.get('Vacancy') : feature.get('Vacancy');
-        if (!isUndefined(vacancy)) {
-            content += '<a href="http://www.city.yokohama.lg.jp/kohoku/sabisu/hoiku/" target="_blank">空き情報</a>';
-        }
-        var vacancyDate = feature.get('VacancyDate');
-        if (!isUndefined(vacancyDate)) {
-            content += " (" + vacancyDate + ")";
-        }
-        content += '</td>';
-        content += '</tr>';
-    }
+    // var type = feature.get('種別') ? feature.get('種別') : feature.get('Type');
+    // if(type == "私立認可保育所") {
+    //     content += '<tr>';
+    //     content += '<th>欠員</th>';
+    //     content += '<td>';
+    //     var vacancy = feature.get('Vacancy') ? feature.get('Vacancy') : feature.get('Vacancy');
+    //     if (!isUndefined(vacancy)) {
+    //         content += '<a href="http://www.city.yokohama.lg.jp/kohoku/sabisu/hoiku/" target="_blank">空き情報</a>';
+    //     }
+    //     var vacancyDate = feature.get('VacancyDate');
+    //     if (!isUndefined(vacancyDate)) {
+    //         content += " (" + vacancyDate + ")";
+    //     }
+    //     content += '</td>';
+    //     content += '</tr>';
+    // }
     var ageS = feature.get('開始年齢') ? feature.get('開始年齢') : feature.get('AgeS');
     var ageE = feature.get('終了年齢') ? feature.get('終了年齢') : feature.get('AgeE');
     if (!isUndefined(ageS) && !isUndefined(ageE)) {

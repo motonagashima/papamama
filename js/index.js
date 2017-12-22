@@ -148,6 +148,7 @@ $('#mainPage').on('pageshow', function() {
 
 		var feature = null;
 		var layer   = null;
+		var coord		= null;
 		if(obj !== undefined) {
 			feature = obj.feature;
 			layer   = obj.layer;
@@ -174,7 +175,7 @@ $('#mainPage').on('pageshow', function() {
 				return;
 			}
 			var geometry = feature.getGeometry();
-			var coord = geometry.getCoordinates();
+			coord = geometry.getCoordinates();
 			popup.setPosition(coord);
 
 			// タイトル部
@@ -335,7 +336,7 @@ $('#mainPage').on('pageshow', function() {
 	'use strict';
 
 		// 条件作成処理
-		var conditions = [];
+		var conditions = {};
 		var checkObj = {
 			pubNinka: false,
 			priNinka: false,
@@ -357,20 +358,37 @@ $('#mainPage').on('pageshow', function() {
 		// フィルター適用時
 		if(Object.keys(conditions).length > 0) {
 			var filter = new FacilityFilter();
+			checkObj.filterPattern = 0; // Google Analyticsのイベントトラッキングで送信する値のデフォルト値
 			var newGeoJson = filter.getFilteredFeaturesGeoJson(conditions, nurseryFacilities, checkObj); // checkObjを参照渡しで表示レイヤーを取得する
 			papamamap.addNurseryFacilitiesLayer(newGeoJson);
 			$('#btnFilter').css('background-color', '#3388cc');
+			// 検索結果の一覧のhtmlを新規タブで表示される。クエリで検索条件を新規Windowへ渡す
+			if (document.getElementById("filteredList").checked) {
+				var urlQuery = '?';
+				Object.keys(conditions).forEach(function(item) {
+					urlQuery += item + '=' + conditions[item] + '&';
+				});
+				urlQuery = urlQuery.slice(0,urlQuery.length-1);
+				window.open(location.origin+'/filteredList.html'+urlQuery);
+			}
 		} else {
 			papamamap.addNurseryFacilitiesLayer(nurseryFacilities);
 			$('#btnFilter').css('background-color', '#f6f6f6');
 			Object.keys(checkObj).forEach(function(item) {
 				checkObj[item] = true;
 			});
+			checkObj.filterPattern = 0; // Google Analyticsのイベントトラッキングで送信する値
 		}
 
 		// レイヤー表示状態によって施設の表示を切り替える
 		updateLayerStatus(checkObj);
-		// updateLayerStatus({pubNinka: pubNinka, priNinka: priNinka, ninkagai: ninkagai, yhoiku: yhoiku, kindergarten: kindergarten, jigyosho: jigyosho});
+
+		// ga('send', 'event', 'カテゴリ', 'アクション', 'ラベル', '値', { nonInteraction: 真偽値 } )
+ 		// *nonInteraction: trueはイベントが発生しても直帰率に影響せず、falseはイベントの呼び出しで直帰とみなされなくなる
+ 		ga('send', 'event', 'nurseryFacilities', 'filter', this.id, checkObj.filterPattern) ;
+ 		// 本イベントを直帰率へ反映させたくない場合は以下を使用すること。
+ 		// ga('send', 'event', 'nurseryFacilities', 'filter', this.id, checkObj.filterPattern, { nonInteraction: true });
+
 	});
 
 	// 絞込条件のリセット
@@ -548,5 +566,7 @@ function closeTime()
 	document.getElementById("jigyoshoCloseTime").innerHTML = options;
 	return;
 }
-openTime();
-closeTime();
+if (document.getElementById("filterdialog")) {
+	openTime();
+	closeTime();
+}
