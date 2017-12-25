@@ -46,6 +46,8 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
     // 小規模・事業所内保育事業の検索元データを取得
     var jigyoshoFeatures = nurseryFacilities.features.filter(filterFunc("小規模・事業所内保育事業"));
 
+    // 障害児通所支援事業の検索元データを取得
+    var disabilityFeatures = nurseryFacilities.features.filter(filterFunc("障害児通所支援事業"));
 
     // フィルターで渡すコールバック関数を返す
     var getFileterFunc = function (conditionVal, funcType) {
@@ -190,7 +192,15 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
       jigyoshoIchijiHoiku: 1*2**38,
       jigyoshoYakan:       1*2**39,
       jigyoshoKyujitu:     1*2**40,
-      jigyoshoEncho:       1*2**41
+      jigyoshoEncho:       1*2**41,
+
+      disabilityOpenTime:   1*2**42,
+      disabilityCloseTime:  1*2**43,
+      disability24H:        1*2**44,
+      disabilityIchijiHoiku: 1*2**45,
+      disabilityYakan:       1*2**46,
+      disabilityKyujitu:     1*2**47,
+      disabilityEncho:       1*2**48
     });
 
     // ----------------------------------------------------------------------
@@ -452,6 +462,49 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
     //     checkObj.jigyosho = true;
     // }
 
+    // ----------------------------------------------------------------------
+    // 障害児通所支援事業向けフィルター
+    // ----------------------------------------------------------------------
+    if (conditions.disabilityOpenTime) {
+        disabilityFeatures = disabilityFeatures.filter(getFileterFunc(conditions.disabilityOpenTime, 'OpenTime'));
+        checkObj.disability = true;
+        checkObj.filterPattern += gaEventVal.disabilityOpenTime;
+    }
+    if (conditions.disabilityCloseTime) {
+        disabilityFeatures = disabilityFeatures.filter(getFileterFunc(conditions.disabilityCloseTime, 'CloseTime'));
+        checkObj.disability = true;
+        checkObj.filterPattern += gaEventVal.disabilityCloseTime;
+    }
+    if (conditions.disability24H) {
+        disabilityFeatures = disabilityFeatures.filter(getFileterFunc(conditions.disability24H, 'H24'));
+        checkObj.disability = true;
+        checkObj.filterPattern += gaEventVal.disability24H;
+    }
+    if (conditions.disabilityIchijiHoiku) {
+        disabilityFeatures = disabilityFeatures.filter(getFileterFunc(conditions.disabilityIchijiHoiku, 'IchijiHoiku'));
+        checkObj.disability = true;
+        checkObj.filterPattern += gaEventVal.disabilityIchijiHoiku;
+    }
+    if (conditions.disabilityYakan) {
+        disabilityFeatures = disabilityFeatures.filter(getFileterFunc(conditions.disabilityYakan, 'Yakan'));
+        checkObj.disability = true;
+        checkObj.filterPattern += gaEventVal.disabilityYakan;
+    }
+    if (conditions.disabilityKyujitu) {
+        disabilityFeatures = disabilityFeatures.filter(getFileterFunc(conditions.disabilityKyujitu, 'Kyujitu'));
+        checkObj.disability = true;
+        checkObj.filterPattern += gaEventVal.disabilityKyujitu;
+    }
+    if (conditions.disabilityEncho) {
+        disabilityFeatures = disabilityFeatures.filter(getFileterFunc(conditions.disabilityEncho, 'Encho'));
+        checkObj.disability = true;
+        checkObj.filterPattern += gaEventVal.disabilityEncho;
+    }
+    // if (conditions.disabilityVacancy) {
+    //     disabilityFeatures = disabilityFeatures.filter(getFileterFunc(conditions.disabilityVacancy, 'Vacancy'));
+    //     checkObj.disability = true;
+    // }
+
     // 戻り値の作成
     var features = [];
     Array.prototype.push.apply(features, pubNinkaFeatures);
@@ -460,6 +513,7 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
     Array.prototype.push.apply(features, yhoikuFeatures);
     Array.prototype.push.apply(features, kindergartenFeatures);
     Array.prototype.push.apply(features, jigyoshoFeatures);
+    Array.prototype.push.apply(features, disabilityFeatures);
     newGeoJson.features = features;
     return newGeoJson;
 };

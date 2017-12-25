@@ -244,6 +244,11 @@ $('#mainPage').on('pageshow', function() {
 		papamamap.switchLayer(this.id, $(this).prop('checked'));
 	});
 
+	// 障害児通所支援事業チェックボックスのイベント設定
+	$('#cbDisability').click(function() {
+		papamamap.switchLayer(this.id, $(this).prop('checked'));
+	});
+
 	// 中学校区チェックボックスのイベント定義
 	$('#cbMiddleSchool').click(function() {
 		layer = map.getLayers().item(1);
@@ -343,7 +348,8 @@ $('#mainPage').on('pageshow', function() {
 			ninkagai: false,
 			yhoiku: false,
 			kindergarten: false,
-			jigyosho: false
+			jigyosho: false,
+			disability: false
 		};
 
 		// 検索フィルターのセレクト(filtersbクラス)で選択されたもののみ抽出
@@ -407,7 +413,7 @@ $('#mainPage').on('pageshow', function() {
 		$('#btnFilter').css('background-color', '#f6f6f6');
 
 		// レイヤー表示状態によって施設の表示を切り替える
-		updateLayerStatus({pubNinka: true, priNinka: true, ninkagai: true, yhoiku: true, kindergarten: true, jigyosho: true});
+		updateLayerStatus({pubNinka: true, priNinka: true, ninkagai: true, yhoiku: true, kindergarten: true, jigyosho: true, disability: true});
 	});
 
 	/**
@@ -424,12 +430,14 @@ $('#mainPage').on('pageshow', function() {
 		papamamap.switchLayer($('#cbYhoiku').prop('id'), checkObj.yhoiku);
 		papamamap.switchLayer($('#cbKindergarten').prop('id'), checkObj.kindergarten);
 		papamamap.switchLayer($('#cbJigyosho').prop('id'), checkObj.jigyosho);
+		papamamap.switchLayer($('#cbDisability').prop('id'), checkObj.disability);
 		$('#cbPriNinka').prop('checked', checkObj.priNinka).checkboxradio('refresh');
 		$('#cbPubNinka').prop('checked', checkObj.pubNinka).checkboxradio('refresh');
 		$('#cbNinkagai').prop('checked', checkObj.ninkagai).checkboxradio('refresh'	);
 		$('#cbYhoiku').prop('checked', checkObj.yhoiku).checkboxradio('refresh');
 		$('#cbKindergarten').prop('checked', checkObj.kindergarten).checkboxradio('refresh');
 		$('#cbJigyosho').prop('checked', checkObj.jigyosho).checkboxradio('refresh');
+		$('#cbDisability').prop('checked', checkObj.disability).checkboxradio('refresh');
 	}
 
 	/**
@@ -541,7 +549,7 @@ function openTime()
 	document.getElementById("ninkagaiOpenTime").innerHTML = options;
 	document.getElementById("kindergartenOpenTime").innerHTML = options;
 	document.getElementById("jigyoshoOpenTime").innerHTML = options;
-	return;
+	document.getElementById("disabilityOpenTime").innerHTML = options;
 }
 
 /**
@@ -564,7 +572,7 @@ function closeTime()
 	document.getElementById("ninkagaiCloseTime").innerHTML = options;
 	document.getElementById("kindergartenCloseTime").innerHTML = options;
 	document.getElementById("jigyoshoCloseTime").innerHTML = options;
-	return;
+	document.getElementById("disabilityCloseTime").innerHTML = options;
 }
 if (document.getElementById("filterdialog")) {
 	openTime();

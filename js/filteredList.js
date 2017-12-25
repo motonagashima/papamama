@@ -9,7 +9,8 @@ if(location.search) {
 		ninkagai: false,
 		yhoiku: false,
 		kindergarten: false,
-		jigyosho: false
+		jigyosho: false,
+    disability: false
 	};
 
   var typeObj = {
@@ -18,7 +19,8 @@ if(location.search) {
 		ninkagai: '認可外保育施設',
 		yhoiku: '横浜保育室',
 		kindergarten: '幼稚園',
-		jigyosho: '小規模・事業所内保育事業'
+		jigyosho: '小規模・事業所内保育事業',
+    disability: '障害児通所支援事業'
 	};
 
   var filterObj = {
