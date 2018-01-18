@@ -360,7 +360,7 @@ $('#mainPage').on('pageshow', function() {
 		$('.filtercb').each(function(index,item ) {
 			if (item.checked) conditions[item .id] = 'Y';
 	  });
-				console.log(location);
+				
 		// フィルター適用時
 		if(Object.keys(conditions).length > 0) {
 			var filter = new FacilityFilter();
