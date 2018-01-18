@@ -9,7 +9,8 @@ var featureStyleList = {
 	'私立認可保育所': { color: '#6EE100', img: 'image/018.png'},
 	'公立認可保育所': { color: '#44AA00', img: 'image/018.png'},
 	'横浜保育室': { color: '#0488EE', img: 'image/018.png'},
-	'小規模・事業所内保育事業': { color: '#6DBA9C', img: 'image/018.png'}
+	'小規模・事業所内保育事業': { color: '#6DBA9C', img: 'image/018.png'},
+	'障害児通所支援事業': { color: '#f78cb7', img: 'image/029.png'}
 };
 
 /**
@@ -115,6 +116,23 @@ var jigyoshoStyleFunction = function(feature, resolution)
 };
 
 /**
+ * 障害児通所支援事業向けスタイル
+ * @param  {[type]} feature    [description]
+ * @param  {[type]} resolution [description]
+ * @return {[type]}            [description]
+ */
+var disabilityStyleFunction = function(feature, resolution)
+{
+	var facilityTypeName = feature.get('種別') ? feature.get('種別') : feature.get('Type');
+	var style = [];
+	if(facilityTypeName === "障害児通所支援事業") {
+		featureStyle = featureStyleList[facilityTypeName];
+		style        = nurseryStyleFunction(feature, resolution, featureStyle);
+	}
+	return style;
+};
+
+/**
  * 保育施設共通のスタイル定義
  * @param  {[type]} feature      [description]
  * @param  {[type]} resolution   [description]
@@ -140,7 +158,7 @@ var nurseryStyleFunction = function(feature, resolution, featureStyle) {
 
 	resolution = Math.floor(resolution * 1000);
 	var _type = "";
-	var label = feature.get('ラベル') ? feature.get('ラベル') : feature.get('Label')
+	var label = feature.get('ラベル') ? feature.get('ラベル') : feature.get('Label');
 	var text = resolution < 10000 ? label : '';
 	var style = [];
 	style = [

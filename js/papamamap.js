@@ -158,6 +158,7 @@ Papamamap.prototype.addNurseryFacilitiesLayer = function(facilitiesData)
         this.map.removeLayer(this.map.getLayers().item(4));
         this.map.removeLayer(this.map.getLayers().item(4));
         this.map.removeLayer(this.map.getLayers().item(4));
+        this.map.removeLayer(this.map.getLayers().item(4));
     }
 
     // 幼稚園
@@ -224,6 +225,17 @@ Papamamap.prototype.addNurseryFacilitiesLayer = function(facilitiesData)
             }),
             name: 'layerJigyosho',
             style: jigyoshoStyleFunction
+        })
+    );
+    // 障害児通所支援事業
+    this.map.addLayer(
+        new ol.layer.Vector({
+            source: new ol.source.GeoJSON({
+                projection: 'EPSG:3857',
+                object: facilitiesData
+            }),
+            name: 'layerDisability',
+            style: disabilityStyleFunction
         })
     );
 };
@@ -401,8 +413,16 @@ Papamamap.prototype.getPopupContent = function(feature)
     var night   = feature.get('夜間') ? feature.get('夜間') : feature.get('Night');
     var h24     = feature.get('H24') ? feature.get('H24') : feature.get('H24');
     var extra   = feature.get('延長保育') ? feature.get('延長保育') : feature.get('Extra');
+    var founded = feature.get('設立年度');
+    var pre   = feature.get('プレ幼稚園');
+    var bus = feature.get('園バス');
+    var meal   = feature.get('給食');
+    var disability = feature.get('児童発達支援');
+    var d_degree   = feature.get('重心（児童発達）');
+    var after = feature.get('放課後デイ');
+    var a_degree   = feature.get('重心（放課後デイ）');
 
-    if( !isUndefined(temp) || !isUndefined(holiday) || !isUndefined(night) || !isUndefined(h24) || !isUndefined(extra)) {
+    if( !isUndefined(temp) || !isUndefined(holiday) || !isUndefined(night) || !isUndefined(h24) || !isUndefined(extra) || !isUndefined(founded) || !isUndefined(pre) || !isUndefined(bus) || !isUndefined(meal) || !isUndefined(disability) || !isUndefined(d_degree) || !isUndefined(after) || !isUndefined(a_degree)) {
         content += '<tr>';
         content += '<th></th>';
         content += '<td>';
@@ -421,26 +441,50 @@ Papamamap.prototype.getPopupContent = function(feature)
         if (formatNull(extra) !== null) {
             content += '延長保育 ';
         }
+        if (formatNull(founded) !== null) {
+            content += '設立年度 ';
+        }
+        if (formatNull(pre) !== null) {
+            content += 'プレ幼稚園 ';
+        }
+        if (formatNull(bus) !== null) {
+            content += '園バス ';
+        }
+        if (formatNull(meal) !== null) {
+            content += '給食 ';
+        }
+        if (formatNull(disability) !== null) {
+            content += '児童発達支援';
+        }
+        if (formatNull(d_degree) !== null) {
+            content += '(' + d_degree +') ';
+        } else {content += ' ';}
+        if (formatNull(after) !== null) {
+            content += '放課後デイ';
+        }
+        if (formatNull(a_degree) !== null) {
+            content += '(' + a_degree +') ';
+        } else {content += ' ';}
         content += '</td>';
         content += '</tr>';
     }
 
-    var type = feature.get('種別') ? feature.get('種別') : feature.get('Type');
-    if(type == "私立認可保育所") {
-        content += '<tr>';
-        content += '<th>欠員</th>';
-        content += '<td>';
-        var vacancy = feature.get('Vacancy') ? feature.get('Vacancy') : feature.get('Vacancy');
-        if (!isUndefined(vacancy)) {
-            content += '<a href="http://www.city.yokohama.lg.jp/kohoku/sabisu/hoiku/" target="_blank">空き情報</a>';
-        }
-        var vacancyDate = feature.get('VacancyDate');
-        if (!isUndefined(vacancyDate)) {
-            content += " (" + vacancyDate + ")";
-        }
-        content += '</td>';
-        content += '</tr>';
-    }
+    // var type = feature.get('種別') ? feature.get('種別') : feature.get('Type');
+    // if(type == "私立認可保育所") {
+    //     content += '<tr>';
+    //     content += '<th>欠員</th>';
+    //     content += '<td>';
+    //     var vacancy = feature.get('Vacancy') ? feature.get('Vacancy') : feature.get('Vacancy');
+    //     if (!isUndefined(vacancy)) {
+    //         content += '<a href="http://www.city.yokohama.lg.jp/kohoku/sabisu/hoiku/" target="_blank">空き情報</a>';
+    //     }
+    //     var vacancyDate = feature.get('VacancyDate');
+    //     if (!isUndefined(vacancyDate)) {
+    //         content += " (" + vacancyDate + ")";
+    //     }
+    //     content += '</td>';
+    //     content += '</tr>';
+    // }
     var ageS = feature.get('開始年齢') ? feature.get('開始年齢') : feature.get('AgeS');
     var ageE = feature.get('終了年齢') ? feature.get('終了年齢') : feature.get('AgeE');
     if (!isUndefined(ageS) && !isUndefined(ageE)) {
