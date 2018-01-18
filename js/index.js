@@ -360,7 +360,7 @@ $('#mainPage').on('pageshow', function() {
 		$('.filtercb').each(function(index,item ) {
 			if (item.checked) conditions[item .id] = 'Y';
 	  });
-
+				console.log(location);
 		// フィルター適用時
 		if(Object.keys(conditions).length > 0) {
 			var filter = new FacilityFilter();
@@ -375,7 +375,7 @@ $('#mainPage').on('pageshow', function() {
 					urlQuery += item + '=' + conditions[item] + '&';
 				});
 				urlQuery = urlQuery.slice(0,urlQuery.length-1);
-				window.open(location.origin+'/filteredList.html'+urlQuery);
+				window.open(location.origin+location.pathname+'/filteredList.html'+urlQuery);
 			}
 		} else {
 			papamamap.addNurseryFacilitiesLayer(nurseryFacilities);
