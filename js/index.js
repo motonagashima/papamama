@@ -392,7 +392,7 @@ $('#mainPage').on('pageshow', function() {
 
 		// ga('send', 'event', 'カテゴリ', 'アクション', 'ラベル', '値', { nonInteraction: 真偽値 } )
  		// *nonInteraction: trueはイベントが発生しても直帰率に影響せず、falseはイベントの呼び出しで直帰とみなされなくなる
- 		ga('send', 'event', 'nurseryFacilities', 'filter', this.id, checkObj.filterPattern) ;
+ 		ga('send', 'event', 'filter', this.id, checkObj.filterPattern) ;
  		// 本イベントを直帰率へ反映させたくない場合は以下を使用すること。
  		// ga('send', 'event', 'nurseryFacilities', 'filter', this.id, checkObj.filterPattern, { nonInteraction: true });
 
