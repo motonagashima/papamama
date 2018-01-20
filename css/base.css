@@ -24,40 +24,127 @@
 	text-shadow: black 0.1em 0.1em 0.2em;
 }
 
-#lblPriNinka.ui-checkbox-on {
-	background-color: #6EE100;
+#nav1-btn-div {
+	position: fixed;
+	top:0; right:20px;
+	padding: 0;
+	margin: 0;
+}
+
+#nav1 {
+	position: fixed;
+	top:0; left: 50px;
+}
+
+#map-logo {
+	position:fixed;
+	bottom:0;
+	width: 206px;
+	padding-left: 5px;
+	/* text-shadow: white 2px 2px 0px, white -2px 2px 0px,	white 2px -2px 0px, white -2px -2px 0px; */
+}
+
+#nav1-btn {
+	background-color: white;
+}
+#nav1-btn:hover {
+	background-color: #e0e0e0;
+}
+
+#nav1-btn, #lblPubNinka, #lblPriNinka, #lblNinkagai, #lblYhoiku, #lblJigyosho, #lblKindergarten, #lblDisability, #lblElementarySchool, #lblMiddleSchool,
+#btnFilter, #changeBaseMap-button, #moveTo-button, #changeCircleRadius-button, #btnHelp {
+	border: groove white;
+	border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
 }
 
 #lblPubNinka.ui-checkbox-on {
 	background-color: #44AA00;
 }
+#lblPubNinka.ui-checkbox-off {
+	background-color: rgba(240,240,240,0.8);
+}
+#lblPubNinka:hover {
+	color: lightblue;
+}
+
+#lblPriNinka.ui-checkbox-on {
+	background-color: #6EE100;
+}
+#lblPriNinka.ui-checkbox-off {
+	background-color: rgba(240,240,240,0.8);
+}
+#lblPriNinka:hover {
+	color: lightblue;
+}
 
 #lblNinkagai.ui-checkbox-on {
 	background-color: #0362A0;
+}
+#lblNinkagai.ui-checkbox-off {
+	background-color: rgba(240,240,240,0.8);
+}
+#lblNinkagai:hover {
+	color: lightblue;
 }
 
 #lblYhoiku.ui-checkbox-on {
 	background-color: #0488EE;
 }
+#lblYhoiku.ui-checkbox-off {
+	background-color: rgba(240,240,240,0.8);
+}
+#lblYhoiku:hover {
+	color: lightblue;
+}
 
 #lblJigyosho.ui-checkbox-on {
 	background-color: #6DBA9C;
+}
+#lblJigyosho.ui-checkbox-off {
+	background-color: rgba(240,240,240,0.8);
+}
+#lblJigyosho:hover {
+	color: lightblue;
 }
 
 #lblKindergarten.ui-checkbox-on {
 	background-color: #FF5C24;
 }
+#lblKindergarten.ui-checkbox-off {
+	background-color: rgba(240,240,240,0.8);
+}
+#lblKindergarten:hover {
+	color: lightblue;
+}
 
 #lblDisability.ui-checkbox-on {
 	background-color: #f78cb7;
+}
+#lblDisability.ui-checkbox-off {
+	background-color: rgba(240,240,240,0.8);
+}
+#lblDisability:hover {
+	color: lightblue;
+}
+
+#lblElementarySchool.ui-checkbox-on {
+	background-color: #1BA466;
+}
+#lblElementarySchool.ui-checkbox-off {
+	background-color: rgba(240,240,240,0.8);
+}
+#lblElementarySchool:hover {
+	color: lightblue;
 }
 
 #lblMiddleSchool.ui-checkbox-on {
 	background-color: #7379AE;
 }
-
-#lblElementarySchool.ui-checkbox-on {
-	background-color: #1BA466;
+#lblMiddleSchool.ui-checkbox-off {
+	background-color: rgba(240,240,240,0.8);
+}
+#lblMiddleSchool:hover {
+	color: lightblue;
 }
 
 .ol-popup {
@@ -166,6 +253,7 @@ h3 {
 
 legend {
 	margin-bottom: 0;
+	font-size: medium;
 }
 
 /* ToDo: 検索ボタンの修正&対応が終わるまで無効化(btn-disabled) */

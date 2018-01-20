@@ -76,13 +76,15 @@ var mapServerList = {
  * デバイス回転時、地図の大きさを画面全体に広げる
  * @return {[type]} [description]
  */
-function resizeMapDiv() {
-	var screenHeight = $.mobile.getScreenHeight();
-	var contentCurrentHeight = $(".ui-content").outerHeight() - $(".ui-content").height();
-	var contentHeight = screenHeight - contentCurrentHeight;
-	var navHeight = $("#nav1").outerHeight();
-	$(".ui-content").height(contentHeight);
-	$("#map").height(contentHeight - navHeight);
+ function resizeMapDiv() {
+ 	var screenHeight = $.mobile.getScreenHeight();
+ 	// var contentCurrentHeight = $(".ui-content").outerHeight() - $(".ui-content").height();
+ 	// var contentHeight = screenHeight - contentCurrentHeight;
+ 	// var navHeight = $("#nav1").outerHeight();
+ 	// $(".ui-content").height(contentHeight);
+ 	$(".ui-content").height(screenHeight);
+ 	$("#map").height(screenHeight);
+ 	// $("#map").height(contentHeight - navHeight);
 }
 
 $(window).on("orientationchange", function() {
@@ -360,7 +362,7 @@ $('#mainPage').on('pageshow', function() {
 		$('.filtercb').each(function(index,item ) {
 			if (item.checked) conditions[item .id] = 'Y';
 	  });
-				
+
 		// フィルター適用時
 		if(Object.keys(conditions).length > 0) {
 			var filter = new FacilityFilter();
@@ -527,6 +529,74 @@ $('#mainPage').on('pageshow', function() {
 		 $('#markerTitle').hide();
 		 $('#marker').hide();
 	 }
+
+	  // メニューボタンをクリックした時のイベントの登録
+		document.getElementById('nav1-btn').addEventListener('click', function (event) {
+	 	 	var elem = document.getElementsByClassName("nav1-li");
+			if (elem[0].style.display === "none") {
+				Object.keys(elem[0].children).forEach(function(i){
+					elem[0].children[i].style.width =  (window.innerWidth / 3 * 1) + "px";
+				});
+				["btnFilter", "changeBaseMap-button", "moveTo-button", "changeCircleRadius-button", "btnHelp"].forEach(function(e) {
+					document.getElementById(e).style.width = (window.innerWidth / 3 * 1) + "px";
+				});
+				elem[0].style.display ="inline-block";
+				document.getElementById("nav1").style.top = (this.clientHeight + 10) + "px";
+				document.getElementById("nav1").style.left = (window.innerWidth / 3 * 2 - 5) + "px";
+				elem[1].style.display ="inline-block";
+			} else {
+				elem[0].style.display ="none";
+				elem[1].style.display ="none";
+			}
+
+ 	 });
+
+   // メニューバーとロゴをWindowサイズに合わせて配置を変更する
+	 var toggleNavbar = function () {
+		 	var elem = document.getElementsByClassName("nav1-li");
+			document.getElementById("nav1").style.top = "0px";
+			document.getElementById("nav1").style.left = "50px";
+			Object.keys(elem[0].children).forEach(function(item){
+				elem[0].children[item].style.width = "";
+			});
+			["btnFilter", "changeBaseMap-button", "moveTo-button", "changeCircleRadius-button", "btnHelp"].forEach(function(e) {
+				document.getElementById(e).style.width = "";
+			});
+		 	elem[0].style.display ="inline-block";
+			elem[1].style.display ="inline-block";
+			var btn = document.getElementById("nav1-btn-div");
+			btn.style.display = "none";
+
+			var logo = document.getElementById("map-logo");
+			logo.style.left = window.innerWidth / 2 - 115 + "px";
+			// Windowサイズがメニューの幅より小さい場合(つまりメニューが複数行となる場合)
+		 	if (elem[0].clientHeight > 50) {
+		 		elem[0].style.display ="none";
+				elem[1].style.display ="none";
+				btn.style.display = "block";
+				logo.style.top = "0";
+				logo.style.bottom = "";
+			// Windowサイズがメニューの幅より大きい場合
+		 	} else {
+		 		elem[0].style.display ="inline-block";
+				elem[1].style.display ="inline-block";
+				btn.style.display = "none";
+				logo.style.top = "";
+				logo.style.bottom = "0";
+		 	}
+	 };
+	 // ページのロード時に一度実行する
+	 toggleNavbar();
+
+	 // Windowsサイズの変更時のイベントを登録
+	 var resizeTimer;
+	 window.addEventListener('resize', function (event) {
+	 	if (resizeTimer !== false) {
+	 		clearTimeout(resizeTimer);
+	 	}
+	 	resizeTimer = setTimeout(toggleNavbar(), 100);
+	 });
+
 });
 
 /**
