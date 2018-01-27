@@ -534,15 +534,7 @@ $('#mainPage').on('pageshow', function() {
 		document.getElementById('nav1-btn').addEventListener('click', function (event) {
 	 	 	var elem = document.getElementsByClassName("nav1-li");
 			if (elem[0].style.display === "none") {
-				Object.keys(elem[0].children).forEach(function(i){
-					elem[0].children[i].style.width =  (window.innerWidth / 3 * 1) + "px";
-				});
-				["btnFilter", "changeBaseMap-button", "moveTo-button", "changeCircleRadius-button", "btnHelp"].forEach(function(e) {
-					document.getElementById(e).style.width = (window.innerWidth / 3 * 1) + "px";
-				});
 				elem[0].style.display ="inline-block";
-				document.getElementById("nav1").style.top = (this.clientHeight + 10) + "px";
-				document.getElementById("nav1").style.left = (window.innerWidth / 3 * 2 - 5) + "px";
 				elem[1].style.display ="inline-block";
 			} else {
 				elem[0].style.display ="none";
@@ -553,6 +545,10 @@ $('#mainPage').on('pageshow', function() {
 
    // メニューバーとロゴをWindowサイズに合わせて配置を変更する
 	 var toggleNavbar = function () {
+
+		  // マップのサイズを画面サイズに調整
+		  resizeMapDiv();
+
 		 	var elem = document.getElementsByClassName("nav1-li");
 			document.getElementById("nav1").style.top = "0px";
 			document.getElementById("nav1").style.left = "50px";
@@ -575,14 +571,27 @@ $('#mainPage').on('pageshow', function() {
 				elem[1].style.display ="none";
 				btn.style.display = "block";
 				logo.style.top = "0";
+				logo.style.height = "0";
 				logo.style.bottom = "";
+				Object.keys(elem[0].children).forEach(function(i){
+					elem[0].children[i].style.width =  (window.innerWidth / 3 * 1) + "px";
+				});
+				["btnFilter", "changeBaseMap-button", "moveTo-button", "changeCircleRadius-button", "btnHelp"].forEach(function(e) {
+					document.getElementById(e).style.width = (window.innerWidth / 3 * 1) + "px";
+				});
+				document.getElementById("nav1").style.top = (btn.clientHeight - 5) + "px";
+				if (window.innerHeight > 580) {
+						document.getElementById("nav1").style.left = (window.innerWidth / 3 * 2 - 5) + "px";
+				} else {
+						document.getElementById("nav1").style.left = (window.innerWidth / 3 * 1 - 5) + "px";
+				}
 			// Windowサイズがメニューの幅より大きい場合
 		 	} else {
 		 		elem[0].style.display ="inline-block";
 				elem[1].style.display ="inline-block";
 				btn.style.display = "none";
 				logo.style.top = "";
-				logo.style.bottom = "0";
+				logo.style.bottom = "30px";
 		 	}
 	 };
 	 // ページのロード時に一度実行する

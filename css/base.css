@@ -38,8 +38,8 @@
 
 #map-logo {
 	position:fixed;
-	bottom:0;
 	width: 206px;
+	height: 0px;
 	padding-left: 5px;
 	/* text-shadow: white 2px 2px 0px, white -2px 2px 0px,	white 2px -2px 0px, white -2px -2px 0px; */
 }
