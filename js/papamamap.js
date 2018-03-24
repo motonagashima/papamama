@@ -144,7 +144,7 @@ Papamamap.prototype.animatedMove = function(lon, lat, isTransform)
 
 
 /**
- * 指定したgeojsonデータを元に公立認可・私立認可・小規模等・横浜保育室・認可外・幼稚園レイヤーを描写する
+ * 指定したgeojsonデータを元に公立認可・私立認可・小規模等・認証・認可外・幼稚園レイヤーを描写する
  *    ※上記以外に描写レイヤーを追加する時は、下の this.map.removeLayer(this.map.getLayers().item(4)); も追加レイヤーの数だけ追加してください！
  *
  * @param {[type]} facilitiesData [description]
@@ -205,15 +205,15 @@ Papamamap.prototype.addNurseryFacilitiesLayer = function(facilitiesData)
             style: pubNinkaStyleFunction
         })
     );
-    // 横浜保育室
+    // 認証
     this.map.addLayer(
         new ol.layer.Vector({
             source: new ol.source.GeoJSON({
                 projection: 'EPSG:3857',
                 object: facilitiesData
             }),
-            name: 'layerYhoiku',
-            style: yhoikuStyleFunction
+            name: 'layerNinsyou',
+            style: ninsyouStyleFunction
         })
     );
     // 小規模・事業所内保育事業

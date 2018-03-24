@@ -1,8 +1,8 @@
 // 地図表示時の中心座標
-var init_center_coords = [139.61827, 35.51264];
+var init_center_coords = [139.618728,35.748973];
 
 // Bing APIのキー
-var bing_api_key = 'Ahs7qRRd1eAtwgE7igbe7DOnXYvq_Pg81foKgM727r3S1949_mj8hrsqIY4iAxW9';
+var bing_api_key = 'Ap-kk3eox-rGrZ07nFRNVGWy6BlbbkhXeXi-TwvOuIcltcoLsuEsEoBEWmVTWHOe';
 
 // map
 var map;
@@ -22,19 +22,6 @@ var mapServerList = {
 			culture: 'ja-jp',
 			key: bing_api_key,
 			imagerySet: 'Road',
-		})
-	},
-	'mierune-mono': {
-		label: "白地図",
-		source_type: "xyz",
-		source: new ol.source.XYZ({
-			attributions: [
-				new ol.Attribution({
-					html: "Maptiles by MIERUNE, under CC BY. Data by OpenStreetMap contributors, under ODbL."
-				})
-			],
-			url: "https://tile.mierune.co.jp/mierune_mono/{z}/{x}/{y}.png",
-			projection: "EPSG:3857"
 		})
 	},
 	"cyberjapn-pale": {
@@ -231,13 +218,13 @@ $('#mainPage').on('pageshow', function() {
 		papamamap.switchLayer(this.id, $(this).prop('checked'));
 	});
 
-	// 認可外保育所チェックボックスのイベント設定
-	$('#cbNinkagai').click(function() {
+	// 認証保育所チェックボックスのイベント設定
+	$('#cbNinsyou').click(function() {
 		papamamap.switchLayer(this.id, $(this).prop('checked'));
 	});
 
-	// 横浜保育室チェックボックスのイベント設定
-	$('#cbYhoiku').click(function() {
+	// 認可外保育所チェックボックスのイベント設定
+	$('#cbNinkagai').click(function() {
 		papamamap.switchLayer(this.id, $(this).prop('checked'));
 	});
 
@@ -416,7 +403,7 @@ $('#mainPage').on('pageshow', function() {
 		$('#btnFilter').css('background-color', '#f6f6f6');
 
 		// レイヤー表示状態によって施設の表示を切り替える
-		updateLayerStatus({pubNinka: true, priNinka: true, ninkagai: true, yhoiku: true, kindergarten: true, jigyosho: true, disability: true});
+		updateLayerStatus({pubNinka: true, priNinka: true, ninsyou: true, ninkagai: true, kindergarten: true, jigyosho: true, disability: true});
 	});
 
 	/**
@@ -429,6 +416,7 @@ $('#mainPage').on('pageshow', function() {
 	{
 		papamamap.switchLayer($('#cbPriNinka').prop('id'), checkObj.priNinka);
 		papamamap.switchLayer($('#cbPubNinka').prop('id'), checkObj.pubNinka);
+		papamamap.switchLayer($('#cbNinsyou').prop('id'), checkObj.ninsyou);
 		papamamap.switchLayer($('#cbNinkagai').prop('id'), checkObj.ninkagai);
 		papamamap.switchLayer($('#cbYhoiku').prop('id'), checkObj.yhoiku);
 		papamamap.switchLayer($('#cbKindergarten').prop('id'), checkObj.kindergarten);
@@ -436,6 +424,7 @@ $('#mainPage').on('pageshow', function() {
 		papamamap.switchLayer($('#cbDisability').prop('id'), checkObj.disability);
 		$('#cbPriNinka').prop('checked', checkObj.priNinka).checkboxradio('refresh');
 		$('#cbPubNinka').prop('checked', checkObj.pubNinka).checkboxradio('refresh');
+		$('#cbNinsyou').prop('checked', checkObj.ninsyou).checkboxradio('refresh'	);
 		$('#cbNinkagai').prop('checked', checkObj.ninkagai).checkboxradio('refresh'	);
 		$('#cbYhoiku').prop('checked', checkObj.yhoiku).checkboxradio('refresh');
 		$('#cbKindergarten').prop('checked', checkObj.kindergarten).checkboxradio('refresh');
@@ -625,7 +614,7 @@ function openTime()
 
 	document.getElementById("pubNinkaOpenTime").innerHTML = options;
 	document.getElementById("priNinkaOpenTime").innerHTML = options;
-	document.getElementById("yhoikuOpenTime").innerHTML = options;
+	document.getElementById("ninsyouOpenTime").innerHTML = options;
 	document.getElementById("ninkagaiOpenTime").innerHTML = options;
 	document.getElementById("kindergartenOpenTime").innerHTML = options;
 	document.getElementById("jigyoshoOpenTime").innerHTML = options;
@@ -648,7 +637,7 @@ function closeTime()
 
 	document.getElementById("pubNinkaCloseTime").innerHTML = options;
 	document.getElementById("priNinkaCloseTime").innerHTML = options;
-	document.getElementById("yhoikuCloseTime").innerHTML = options;
+	document.getElementById("ninsyouCloseTime").innerHTML = options;
 	document.getElementById("ninkagaiCloseTime").innerHTML = options;
 	document.getElementById("kindergartenCloseTime").innerHTML = options;
 	document.getElementById("jigyoshoCloseTime").innerHTML = options;

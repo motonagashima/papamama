@@ -32,13 +32,13 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
     var pubNinkaFeatures = nurseryFacilities.features.filter(filterFunc("公立認可保育所"));
 
     // 私立認可保育園の検索元データを取得
-    var priNinkaFeatures = nurseryFacilities.features.filter(filterFunc("私立認可保育所"));
+    var priNinkaFeatures = nurseryFacilities.features.filter(filterFunc("私立認可保育園"));
+
+    // 認証保育園の検索元データを取得
+    var ninsyouFeatures = nurseryFacilities.features.filter(filterFunc("認証保育所"));
 
     // 認可外保育園の検索元データを取得
     var ninkagaiFeatures = nurseryFacilities.features.filter(filterFunc("認可外保育施設"));
-
-    // 横浜保育室の検索元データを取得
-    var yhoikuFeatures = nurseryFacilities.features.filter(filterFunc("横浜保育室"));
 
     // 幼稚園の検索元データを取得
     var kindergartenFeatures = nurseryFacilities.features.filter(filterFunc("幼稚園"));
@@ -170,13 +170,13 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
       ninkagaiKyujitu:     1*2**19,
       ninkagaiEncho:       1*2**20,
 
-      yhoikuOpenTime:   1*2**21,
-      yhoikuCloseTime:  1*2**22,
-      yhoiku24H:        1*2**23,
-      yhoikuIchijiHoiku: 1*2**24,
-      yhoikuYakan:       1*2**25,
-      yhoikuKyujitu:     1*2**26,
-      yhoikuEncho:       1*2**27,
+      ninsyouOpenTime:   1*2**21,
+      ninsyouCloseTime:  1*2**22,
+      ninsyou24H:        1*2**23,
+      ninsyouIchijiHoiku: 1*2**24,
+      ninsyouYakan:       1*2**25,
+      ninsyouKyujitu:     1*2**26,
+      ninsyouEncho:       1*2**27,
 
       kindergartenOpenTime:   1*2**28,
       kindergartenCloseTime:  1*2**29,
@@ -287,6 +287,49 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
     // if (conditions.priNinkaVacancy) {
     //     priNinkaFeatures = priNinkaFeatures.filter(getFileterFunc(conditions.priNinkaVacancy, 'Vacancy'));
     //     checkObj.priNinka= true;
+    // }
+
+    // ----------------------------------------------------------------------
+    // 認証保育園向けフィルター
+    // ----------------------------------------------------------------------
+    if (conditions.ninsyouOpenTime) {
+        ninsyouFeatures = ninsyouFeatures.filter(getFileterFunc(conditions.ninsyouOpenTime, 'OpenTime'));
+        checkObj.ninsyou = true;
+        checkObj.filterPattern += gaEventVal.ninsyouOpenTime;
+    }
+    if (conditions.ninsyouCloseTime) {
+        ninsyouFeatures = ninsyouFeatures.filter(getFileterFunc(conditions.ninsyouCloseTime, 'CloseTime'));
+        checkObj.ninsyou = true;
+        checkObj.filterPattern += gaEventVal.ninsyouCloseTime;
+    }
+    if (conditions.ninsyou24H) {
+        ninsyouFeatures = ninsyouFeatures.filter(getFileterFunc(conditions.ninsyou24H, 'H24'));
+        checkObj.ninsyou = true;
+        checkObj.filterPattern += gaEventVal.ninsyou24H;
+    }
+    if (conditions.ninsyouIchijiHoiku) {
+        ninsyouFeatures = ninsyouFeatures.filter(getFileterFunc(conditions.ninsyouIchijiHoiku, 'IchijiHoiku'));
+        checkObj.ninsyou = true;
+        checkObj.filterPattern += gaEventVal.ninsyouIchijiHoiku;
+    }
+    if (conditions.ninsyouYakan) {
+        ninsyouFeatures = ninsyouFeatures.filter(getFileterFunc(conditions.ninsyouYakan, 'Yakan'));
+        checkObj.ninsyou = true;
+        checkObj.filterPattern += gaEventVal.ninsyouYakan;
+    }
+    if (conditions.ninsyouKyujitu) {
+        ninsyouFeatures = ninsyouFeatures.filter(getFileterFunc(conditions.ninsyouKyujitu, 'Kyujitu'));
+        checkObj.ninsyou = true;
+        checkObj.filterPattern += gaEventVal.ninsyouKyujitu;
+    }
+    if (conditions.ninsyouEncho) {
+        ninsyouFeatures = ninsyouFeatures.filter(getFileterFunc(conditions.ninsyouEncho, 'Encho'));
+        checkObj.ninsyou = true;
+        checkObj.filterPattern += gaEventVal.ninsyouEncho;
+    }
+    // if (conditions.ninkagaiVacancy) {
+    //     ninkagaiFeatures = ninkagaiFeatures.filter(getFileterFunc(conditions.ninkagaiVacancy, 'Vacancy'));
+    //     checkObj.ninkagai = true;
     // }
 
 
@@ -509,6 +552,7 @@ FacilityFilter.prototype.getFilteredFeaturesGeoJson = function (conditions, nurs
     var features = [];
     Array.prototype.push.apply(features, pubNinkaFeatures);
     Array.prototype.push.apply(features, priNinkaFeatures);
+    Array.prototype.push.apply(features, ninsyouFeatures);
     Array.prototype.push.apply(features, ninkagaiFeatures);
     Array.prototype.push.apply(features, yhoikuFeatures);
     Array.prototype.push.apply(features, kindergartenFeatures);

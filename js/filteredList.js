@@ -14,10 +14,10 @@ if(location.search) {
 	};
 
   var typeObj = {
-		pubNinka: '公立認可保育所',
-		priNinka: '私立認可保育所',
+		pubNinka: '区立認可保育園',
+		priNinka: '私立認可保育園',
+		ninsyou: '認証保育所',
 		ninkagai: '認可外保育施設',
-		yhoiku: '横浜保育室',
 		kindergarten: '幼稚園',
 		jigyosho: '小規模・事業所内保育事業',
     disability: '障害児通所支援事業'
