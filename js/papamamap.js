@@ -436,7 +436,7 @@ Papamamap.prototype.getPopupContent = function(feature)
             content += '夜間保育 ';
         }
         if (formatNull(h24) !== null) {
-            content += '24時間 ';
+            content += h24;
         }
         if (formatNull(extra) !== null) {
             content += '延長保育 ';
